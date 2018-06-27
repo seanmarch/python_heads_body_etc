@@ -1,0 +1,39 @@
+import os
+import sys
+from PIL import Image
+
+headdirs = 'C:\Users\Sean\Desktop\game\head' #enter directory
+bodydirs = 'C:\Users\Sean\Desktop\game\body' #enter directory
+legsdirs = 'C:\Users\Sean\Desktop\game\legs' #enter directory
+
+headphotos = []
+bodyphotos = []
+legsphotos = []
+
+for photo in headdirs:
+    fileName.append(headphotos)
+
+for photo in bodydirs:
+    fileName.append(bodyphotos)
+
+for photo in legsdirs:
+    fileName.append(legsphotos)
+    
+head = input("player 1 input number between 0 and 4 for the head: ")
+body = input("player 2 input number between 0 and 4 for the body: ")
+legs = input("player 3 input number between 0 and 4 for the legs: ")
+
+images = map(Image.open, [headphotos[head], bodyphotos[body], legsphotos[legs]])
+widths, heights = zip(*(i.size for i in images))
+
+total_width = sum(widths)
+max_height = max(heights)
+
+new_im = Image.new('RGB', (total_width, max_height))
+
+x_offset = 0
+for im in images:
+  new_im.paste(im, (x_offset,0))
+  x_offset += im.size[0]
+
+new_im.save('test.jpg')
